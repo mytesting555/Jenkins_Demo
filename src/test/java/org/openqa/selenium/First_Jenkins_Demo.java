@@ -14,6 +14,29 @@ public class First_Jenkins_Demo {
 
 	static WebDriver driver;
 		// TODO Auto-generated method stub
+	
+	///method for highlight element
+	public static void highlightElement(WebDriver driver, WebElement element)
+	{
+		JavascriptExecutor js=(JavascriptExecutor)driver; 
+
+		js.executeScript("arguments[0].setAttribute('style', 'background:yellow ; border: 2px solid red;');",
+				element);
+
+		try 
+		{
+			Thread.sleep(1000);
+		} 
+		catch (InterruptedException e) {
+
+			System.out.println(e.getMessage());
+		} 
+
+		js.executeScript("arguments[0].setAttribute('style','border: solid 2px white');", element); 
+
+	}
+
+	
 	@BeforeTest
 	public static void browserSetup()
 	{
@@ -39,6 +62,40 @@ public class First_Jenkins_Demo {
 		String fbtitle=driver.getTitle();
 		
 		System.out.println("facebook title is: "+fbtitle);
+		
+		
+		WebElement firstname=driver.findElement(By.id("u_0_m"));
+		
+		highlightElement(driver, firstname);
+		
+		firstname.sendKeys("Thomas");
+		
+		Thread.sleep(2000);
+		
+		WebElement lastname=driver.findElement(By.id("u_0_o"));
+		
+		highlightElement(driver, lastname);
+		
+		lastname.sendKeys("D'caprio");
+		
+		Thread.sleep(2000);
+		
+		WebElement email=driver.findElement(By.id("u_0_r"));
+		
+		highlightElement(driver, email);
+		
+		email.sendKeys("thomas.test@gmail.com");
+		
+		WebElement pass=driver.findElement(By.id("u_0_w"));
+		
+		highlightElement(driver, pass);
+		
+		pass.sendKeys("thomas@123");
+		
+		Thread.sleep(2000);
+		
+		
+		
 		/*
 		//enter first name and surname
 		driver.findElement(By.name("firstname")).sendKeys("Ethan");
